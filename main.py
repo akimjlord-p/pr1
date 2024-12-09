@@ -5,13 +5,13 @@ from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import QPoint
 from PyQt6 import uic
 from random import randint
+from ui import Ui_MainWindow
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        f = open('ui.ui', 'r')
-        uic.loadUi(f, self)
+        self.setupUi(self)
         self.initUI()
         self.do_paint = False
         self.pos = QPoint(200, 200)
@@ -37,7 +37,7 @@ class Example(QMainWindow):
         self.update()
 
     def draw_circle(self, qp):
-        qp.setBrush(QColor('yellow'))
+        qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
         r = randint(1, 150)
         qp.drawEllipse(self.pos, r, r)
 
